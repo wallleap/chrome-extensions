@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "IconFont Helper",
+  "description": "支持iconfont一键添加购物车、批量下载、在线批量改色、一键复制等功能。",
+  "version": "3.0.0",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.iconfont.cn/*"
+  ],
+  "action": {
+    "default_title": "IconFont Helper",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.iconfont.cn/*"
+      ],
+      "css": [
+        "content-script.css"
+      ],
+      "js": [
+        "jszip.js",
+        "content-script.js"
+      ]
+    }
+  ],
+  "manifest_version": 3
+}

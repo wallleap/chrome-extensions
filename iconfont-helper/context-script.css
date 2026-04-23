@@ -1,0 +1,42 @@
+.block-icon-list li .icon-cover {
+  height: auto !important;
+  margin-top: -15px; }
+  .block-icon-list li .icon-cover > span._dawangraoming_copy-button {
+    font-size: 14px; }
+
+._dawangraoming_popup-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  color: #FFF;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+._dawangraoming_alert-message {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 999999;
+  -webkit-transform: translateX(-50%), translateY(-50%);
+          transform: translateX(-50%), translateY(-50%);
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-size: 14px;
+  color: #3a3a3a;
+  height: 44px;
+  padding: 0 28px; }
+
