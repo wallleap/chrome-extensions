@@ -3,13 +3,23 @@ Chrome 扩展收集
 
 ## 如何使用
 
-克隆本仓库到本地，Chrome 进入 <chrome://extensions/>，打开右上角【开发者模式】，点击【加载未打包的扩展程序】，按需选择本仓库下扩展的目录
+克隆本仓库到本地
+
+```sh
+git clone --recurse-submodules https://github.com/wallleap/chrome-extensions.git
+```
+
+Chrome 进入 <chrome://extensions/>，打开右上角【开发者模式】，点击【加载未打包的扩展程序】，按需选择本仓库下扩展的目录
 
 ## 扩展目录
 
 ### iconfont-helper
 
 `iconfont.cn` 全选、反选、单选图标，一键下载 svg
+
+## [cat-catch](https://github.com/xifangczy/cat-catch)
+
+视频/其他资源下载
 
 ## 免责申明
 
