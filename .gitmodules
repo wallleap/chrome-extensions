@@ -1,3 +1,6 @@
 [submodule "cat-catch"]
 	path = cat-catch
 	url = https://github.com/xifangczy/cat-catch.git
+[submodule "AntiDebug_breaker"]
+	path = AntiDebug_breaker
+	url = git@github.com:0xsdeo/AntiDebug_Breaker.git
