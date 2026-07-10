@@ -93,6 +93,7 @@ function selectInvert() {
   });
 }
 
+let svgNameList = []
 // 下载选中的图标
 function downloadSelected() {
   const selectedItems = document.querySelectorAll('.iconfont-helper-selected');
@@ -106,56 +107,53 @@ function downloadSelected() {
   // 创建 JSZip 实例
   const zip = new JSZip();
   let addedCount = 0;
+  const selectedItemNames = []
   
   // 遍历选中的图标
   selectedItems.forEach((item, index) => {
-    console.log('Processing item:', index + 1, item);
+    console.log('Processing item:', index + 1);
     
     // 找到 svg 元素（尝试多种选择器）
     let svgElement = item.querySelector('.icon-twrap > svg.icon');
-    console.log('SVG element 1:', svgElement);
     if (!svgElement) {
       svgElement = item.querySelector('svg.icon');
-      console.log('SVG element 2:', svgElement);
     }
     if (!svgElement) {
-      svgElement = item.querySelector('.icon-twrap svg');
-      console.log('SVG element 3:', svgElement);
+      svgElement = item.querySelector('svg');
     }
     
     if (svgElement) {
       // 获取 svg 内容
       const svgContent = svgElement.outerHTML;
-      console.log('SVG content:', svgContent);
       
       // 尝试获取图标名称（尝试多种选择器）
-      let iconName = `icon-${index + 1}`;
+      let fileName = '';
       let iconNameElement = item.querySelector('.icon-name > span');
-      console.log('Icon name element 1:', iconNameElement);
+      fileName = iconNameElement?.innerText || ''
+      console.log('Icon name 1:', fileName);
       if (!iconNameElement) {
         iconNameElement = item.querySelector('.icon-name');
-        console.log('Icon name element 2:', iconNameElement);
-      }
-      if (!iconNameElement) {
-        iconNameElement = item.querySelector('span.icon-name');
-        console.log('Icon name element 3:', iconNameElement);
+        fileName = iconNameElement?.title || ''
+        console.log('Icon name 2:', fileName);
       }
       
       if (iconNameElement) {
-        const originalIconName = iconNameElement.textContent.trim();
-        console.log('Original icon name:', originalIconName);
         // 保留中文字符，只替换特殊字符
-        iconName = originalIconName.replace(/[^\u4e00-\u9fa5a-zA-Z0-9_-]/g, '_');
-        console.log('Processed icon name:', iconName);
+        fileName = fileName.replace(/[^\u4e00-\u9fa5a-zA-Z0-9_-]/g, '_');
+        console.log('Processed icon name:', fileName);
         // 确保图标名称不为空
-        if (!iconName) {
-          iconName = `icon-${index + 1}`;
-          console.log('Using default icon name:', iconName);
+        if (!fileName) {
+          fileName = `icon-${index + 1}`;
+          console.log('Using default icon name:', fileName);
         }
       }
       
-      // 生成文件名
-      const fileName = `${iconName}.svg`;
+      svgNameList.push(fileName)
+      if (svgNameList.includes(fileName)) {
+        const count = svgNameList.filter(svgName => svgName === fileName).length
+        fileName += count
+      }
+      fileName += '.svg'
       console.log('File name:', fileName);
       // 添加到 zip
       zip.file(fileName, svgContent);
@@ -184,7 +182,10 @@ function downloadSelected() {
     link.click();
   }).catch(function(error) {
     console.error('Error generating zip:', error);
-  });
+  }).finally(function () {
+    console.log('svgNameList:', svgNameList)
+    svgNameList = []
+  })
 }
 
 // 定期检查新的图标项，添加选择框
